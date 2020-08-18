@@ -35,7 +35,8 @@ class TiraNota(BaseEstimator, TransformerMixin):
         return data
     
 class MediaNA(BaseEstimator, TransformerMixin):
-    def __init__(self):
+    def __init__(self, df_data_1):
+        self.df_data_1 = df_data_1
         return
 
     def fit(self, X, y=None):
