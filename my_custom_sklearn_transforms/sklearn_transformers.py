@@ -407,3 +407,24 @@ class QRemove(BaseEstimator, TransformerMixin):
 
         # Retornamos um novo dataframe sem as colunas indesejadas
         return data
+    
+class ImplementaSmote(BaseEstimator, TransformerMixin):
+    def __init__(self, features, X, y):
+        self.features = features
+        self.X = X
+        self.y = y
+
+    def fit(self, A, B, C, y=None):
+        return self
+
+    def transform(self, A, B, C):
+        from imblearn.over_sampling import SMOTE
+
+        self.features = ["NOTA_DE", "NOTA_EM", "NOTA_MF", "NOTA_GO"]
+        features = self.features
+        
+        X_resampled, y_resampled = SMOTE().fit_resample(X, y.values.ravel()) 
+        X_train = X_resampled
+        Y_train = y_resampled
+
+        return features, X_train, Y_train
