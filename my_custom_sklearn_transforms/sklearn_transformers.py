@@ -409,22 +409,24 @@ class QRemove(BaseEstimator, TransformerMixin):
         return data
     
 class ImplementaSmote(BaseEstimator, TransformerMixin):
-    def __init__(self, features, X, y):
+    def __init__(self, features, target):
         self.features = features
-        self.X = X
-        self.y = y
+        self.target = target
 
-    def fit(self, A, B, C, y=None):
+    def fit(self, A, B, y=None):
         return self
 
-    def transform(self, A, B, C):
+    def transform(self, A, B):
         from imblearn.over_sampling import SMOTE
 
         self.features = ["NOTA_DE", "NOTA_EM", "NOTA_MF", "NOTA_GO"]
         features = self.features
-        
-        X_resampled, y_resampled = SMOTE().fit_resample(X, y.values.ravel()) 
-        X_train = X_resampled
-        Y_train = y_resampled
 
-        return features, X_train, Y_train
+        X = data[self.features]
+        y = data[self.target]
+        
+        X_resampled, y_resampled = SMOTE().fit_resample(X, y.values.ravel())
+        X = X_resampled
+        y = y_resampled 
+
+        return X, y
