@@ -42,7 +42,7 @@ class MediaNA(BaseEstimator, TransformerMixin):
         return self
     
     def transform(self, X):
-        data = X.copy()
+        df_data_1 = X.copy()
         
         media = df_data_1['NOTA_GO'][(df_data_1.PERFIL == "EXCELENTE")].mean()
         for index, row in df_data_1[(df_data_1.PERFIL == "EXCELENTE")].iterrows():
