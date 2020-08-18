@@ -156,254 +156,254 @@ class MediaZero(BaseEstimator, TransformerMixin):
         return data
     
     class QRemove(BaseEstimator, TransformerMixin):
-    def __init__(self):
-        return
+        def __init__(self):
+            return
 
-    def fit(self, X, y=None):
-        return self
+        def fit(self, X, y=None):
+            return self
     
-    def transform(self, X):
-        data = X.copy()
+        def transform(self, X):
+            data = X.copy()
         
-        Q1 = data['NOTA_DE'][(data.PERFIL == "EXCELENTE")].quantile(0.25)
-        Q3 = data['NOTA_DE'][(data.PERFIL == "EXCELENTE")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            Q1 = data['NOTA_DE'][(data.PERFIL == "EXCELENTE")].quantile(0.25)
+            Q3 = data['NOTA_DE'][(data.PERFIL == "EXCELENTE")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
 
-        for index, row in data[(data.PERFIL == "EXCELENTE")].iterrows():
-          if(row['NOTA_DE'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_DE'] > Upper):
-            data.drop(index, inplace=True)
+            for index, row in data[(data.PERFIL == "EXCELENTE")].iterrows():
+              if(row['NOTA_DE'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_DE'] > Upper):
+                data.drop(index, inplace=True)
 
-        Q1 = data['NOTA_EM'][(data.PERFIL == "EXCELENTE")].quantile(0.25)
-        Q3 = data['NOTA_EM'][(data.PERFIL == "EXCELENTE")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            Q1 = data['NOTA_EM'][(data.PERFIL == "EXCELENTE")].quantile(0.25)
+            Q3 = data['NOTA_EM'][(data.PERFIL == "EXCELENTE")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
 
-        for index, row in data[(data.PERFIL == "EXCELENTE")].iterrows():
-          if(row['NOTA_EM'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_EM'] > Upper):
-            data.drop(index, inplace=True)
+            for index, row in data[(data.PERFIL == "EXCELENTE")].iterrows():
+              if(row['NOTA_EM'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_EM'] > Upper):
+                data.drop(index, inplace=True)
 
-        Q1 = data['NOTA_MF'][(data.PERFIL == "EXCELENTE")].quantile(0.25)
-        Q3 = data['NOTA_MF'][(data.PERFIL == "EXCELENTE")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            Q1 = data['NOTA_MF'][(data.PERFIL == "EXCELENTE")].quantile(0.25)
+            Q3 = data['NOTA_MF'][(data.PERFIL == "EXCELENTE")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
 
-        for index, row in data[(data.PERFIL == "EXCELENTE")].iterrows():
-          if(row['NOTA_MF'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_MF'] > Upper):
-            data.drop(index, inplace=True)
+            for index, row in data[(data.PERFIL == "EXCELENTE")].iterrows():
+              if(row['NOTA_MF'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_MF'] > Upper):
+                data.drop(index, inplace=True)
 
-        Q1 = data['NOTA_GO'][(data.PERFIL == "EXCELENTE")].quantile(0.25)
-        Q3 = data['NOTA_GO'][(data.PERFIL == "EXCELENTE")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            Q1 = data['NOTA_GO'][(data.PERFIL == "EXCELENTE")].quantile(0.25)
+            Q3 = data['NOTA_GO'][(data.PERFIL == "EXCELENTE")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
 
-        for index, row in data[(data.PERFIL == "EXCELENTE")].iterrows():
-          if(row['NOTA_GO'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_GO'] > Upper):
-            data.drop(index, inplace=True)
+            for index, row in data[(data.PERFIL == "EXCELENTE")].iterrows():
+              if(row['NOTA_GO'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_GO'] > Upper):
+                data.drop(index, inplace=True)
 
-        Q1 = data['NOTA_DE'][(data.PERFIL == "MUITO_BOM")].quantile(0.25)
-        Q3 = data['NOTA_DE'][(data.PERFIL == "MUITO_BOM")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            Q1 = data['NOTA_DE'][(data.PERFIL == "MUITO_BOM")].quantile(0.25)
+            Q3 = data['NOTA_DE'][(data.PERFIL == "MUITO_BOM")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
 
-        for index, row in data[(data.PERFIL == "MUITO_BOM")].iterrows():
-          if(row['NOTA_DE'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_DE'] > Upper):
-            data.drop(index, inplace=True)
+            for index, row in data[(data.PERFIL == "MUITO_BOM")].iterrows():
+              if(row['NOTA_DE'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_DE'] > Upper):
+                data.drop(index, inplace=True)
 
-        Q1 = data['NOTA_EM'][(data.PERFIL == "MUITO_BOM")].quantile(0.25)
-        Q3 = data['NOTA_EM'][(data.PERFIL == "MUITO_BOM")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            Q1 = data['NOTA_EM'][(data.PERFIL == "MUITO_BOM")].quantile(0.25)
+            Q3 = data['NOTA_EM'][(data.PERFIL == "MUITO_BOM")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
 
-        for index, row in data[(data.PERFIL == "MUITO_BOM")].iterrows():
-          if(row['NOTA_EM'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_EM'] > Upper):
-            data.drop(index, inplace=True)
+            for index, row in data[(data.PERFIL == "MUITO_BOM")].iterrows():
+              if(row['NOTA_EM'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_EM'] > Upper):
+                data.drop(index, inplace=True)
 
-        Q1 = data['NOTA_MF'][(data.PERFIL == "MUITO_BOM")].quantile(0.25)
-        Q3 = data['NOTA_MF'][(data.PERFIL == "MUITO_BOM")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            Q1 = data['NOTA_MF'][(data.PERFIL == "MUITO_BOM")].quantile(0.25)
+            Q3 = data['NOTA_MF'][(data.PERFIL == "MUITO_BOM")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
 
-        for index, row in data[(data.PERFIL == "MUITO_BOM")].iterrows():
-          if(row['NOTA_MF'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_MF'] > Upper):
-            data.drop(index, inplace=True)
+            for index, row in data[(data.PERFIL == "MUITO_BOM")].iterrows():
+              if(row['NOTA_MF'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_MF'] > Upper):
+                data.drop(index, inplace=True)
 
-        Q1 = data['NOTA_GO'][(data.PERFIL == "MUITO_BOM")].quantile(0.25)
-        Q3 = data['NOTA_GO'][(data.PERFIL == "MUITO_BOM")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            Q1 = data['NOTA_GO'][(data.PERFIL == "MUITO_BOM")].quantile(0.25)
+            Q3 = data['NOTA_GO'][(data.PERFIL == "MUITO_BOM")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
 
-        for index, row in data[(data.PERFIL == "MUITO_BOM")].iterrows():
-          if(row['NOTA_GO'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_GO'] > Upper):
-            data.drop(index, inplace=True)
+            for index, row in data[(data.PERFIL == "MUITO_BOM")].iterrows():
+              if(row['NOTA_GO'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_GO'] > Upper):
+                data.drop(index, inplace=True)
 
-        Q1 = data['NOTA_DE'][(data.PERFIL == "EXATAS")].quantile(0.25)
-        Q3 = data['NOTA_DE'][(data.PERFIL == "EXATAS")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            Q1 = data['NOTA_DE'][(data.PERFIL == "EXATAS")].quantile(0.25)
+            Q3 = data['NOTA_DE'][(data.PERFIL == "EXATAS")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
 
-        for index, row in data[(data.PERFIL == "EXATAS")].iterrows():
-          if(row['NOTA_DE'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_DE'] > Upper):
-            data.drop(index, inplace=True)
-          
-        Q1 = data['NOTA_EM'][(data.PERFIL == "EXATAS")].quantile(0.25)
-        Q3 = data['NOTA_EM'][(data.PERFIL == "EXATAS")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            for index, row in data[(data.PERFIL == "EXATAS")].iterrows():
+              if(row['NOTA_DE'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_DE'] > Upper):
+                data.drop(index, inplace=True)
 
-        for index, row in data[(data.PERFIL == "EXATAS")].iterrows():
-          if(row['NOTA_EM'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_EM'] > Upper):
-            data.drop(index, inplace=True)
-          
-        Q1 = data['NOTA_MF'][(data.PERFIL == "EXATAS")].quantile(0.25)
-        Q3 = data['NOTA_MF'][(data.PERFIL == "EXATAS")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            Q1 = data['NOTA_EM'][(data.PERFIL == "EXATAS")].quantile(0.25)
+            Q3 = data['NOTA_EM'][(data.PERFIL == "EXATAS")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
 
-        for index, row in data[(data.PERFIL == "EXATAS")].iterrows():
-          if(row['NOTA_MF'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_MF'] > Upper):
-            data.drop(index, inplace=True)
-          
-        Q1 = data['NOTA_GO'][(data.PERFIL == "EXATAS")].quantile(0.25)
-        Q3 = data['NOTA_GO'][(data.PERFIL == "EXATAS")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            for index, row in data[(data.PERFIL == "EXATAS")].iterrows():
+              if(row['NOTA_EM'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_EM'] > Upper):
+                data.drop(index, inplace=True)
 
-        for index, row in data[(data.PERFIL == "EXATAS")].iterrows():
-          if(row['NOTA_GO'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_GO'] > Upper):
-            data.drop(index, inplace=True)
-          
-        Q1 = data['NOTA_DE'][(data.PERFIL == "HUMANAS")].quantile(0.25)
-        Q3 = data['NOTA_DE'][(data.PERFIL == "HUMANAS")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            Q1 = data['NOTA_MF'][(data.PERFIL == "EXATAS")].quantile(0.25)
+            Q3 = data['NOTA_MF'][(data.PERFIL == "EXATAS")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
 
-        for index, row in data[(data.PERFIL == "HUMANAS")].iterrows():
-          if(row['NOTA_DE'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_DE'] > Upper):
-            data.drop(index, inplace=True)
-          
-        Q1 = data['NOTA_EM'][(data.PERFIL == "HUMANAS")].quantile(0.25)
-        Q3 = data['NOTA_EM'][(data.PERFIL == "HUMANAS")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            for index, row in data[(data.PERFIL == "EXATAS")].iterrows():
+              if(row['NOTA_MF'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_MF'] > Upper):
+                data.drop(index, inplace=True)
 
-        for index, row in data[(data.PERFIL == "HUMANAS")].iterrows():
-          if(row['NOTA_EM'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_EM'] > Upper):
-            data.drop(index, inplace=True)
-          
-        Q1 = data['NOTA_MF'][(data.PERFIL == "HUMANAS")].quantile(0.25)
-        Q3 = data['NOTA_MF'][(data.PERFIL == "HUMANAS")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            Q1 = data['NOTA_GO'][(data.PERFIL == "EXATAS")].quantile(0.25)
+            Q3 = data['NOTA_GO'][(data.PERFIL == "EXATAS")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
 
-        for index, row in data[(data.PERFIL == "HUMANAS")].iterrows():
-          if(row['NOTA_MF'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_MF'] > Upper):
-            data.drop(index, inplace=True)
-          
-        Q1 = data['NOTA_GO'][(data.PERFIL == "HUMANAS")].quantile(0.25)
-        Q3 = data['NOTA_GO'][(data.PERFIL == "HUMANAS")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            for index, row in data[(data.PERFIL == "EXATAS")].iterrows():
+              if(row['NOTA_GO'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_GO'] > Upper):
+                data.drop(index, inplace=True)
 
-        for index, row in data[(data.PERFIL == "HUMANAS")].iterrows():
-          if(row['NOTA_GO'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_GO'] > Upper):
-            data.drop(index, inplace=True)
-          
-        Q1 = data['NOTA_DE'][(data.PERFIL == "DIFICULDADE")].quantile(0.25)
-        Q3 = data['NOTA_DE'][(data.PERFIL == "DIFICULDADE")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            Q1 = data['NOTA_DE'][(data.PERFIL == "HUMANAS")].quantile(0.25)
+            Q3 = data['NOTA_DE'][(data.PERFIL == "HUMANAS")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
 
-        for index, row in data[(data.PERFIL == "DIFICULDADE")].iterrows():
-          if(row['NOTA_DE'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_DE'] > Upper):
-            data.drop(index, inplace=True)
-          
-        Q1 = data['NOTA_EM'][(data.PERFIL == "DIFICULDADE")].quantile(0.25)
-        Q3 = data['NOTA_EM'][(data.PERFIL == "DIFICULDADE")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            for index, row in data[(data.PERFIL == "HUMANAS")].iterrows():
+              if(row['NOTA_DE'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_DE'] > Upper):
+                data.drop(index, inplace=True)
 
-        for index, row in data[(data.PERFIL == "DIFICULDADE")].iterrows():
-          if(row['NOTA_EM'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_EM'] > Upper):
-            data.drop(index, inplace=True)
-          
-        Q1 = data['NOTA_MF'][(data.PERFIL == "DIFICULDADE")].quantile(0.25)
-        Q3 = data['NOTA_MF'][(data.PERFIL == "DIFICULDADE")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            Q1 = data['NOTA_EM'][(data.PERFIL == "HUMANAS")].quantile(0.25)
+            Q3 = data['NOTA_EM'][(data.PERFIL == "HUMANAS")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
 
-        for index, row in data[(data.PERFIL == "DIFICULDADE")].iterrows():
-          if(row['NOTA_MF'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_MF'] > Upper):
-            data.drop(index, inplace=True)
-          
-        Q1 = data['NOTA_GO'][(data.PERFIL == "DIFICULDADE")].quantile(0.25)
-        Q3 = data['NOTA_GO'][(data.PERFIL == "DIFICULDADE")].quantile(0.75)
-        IQR = Q3-Q1
-        Lower = Q1-1.5*IQR
-        Upper = Q3+1.5*IQR
+            for index, row in data[(data.PERFIL == "HUMANAS")].iterrows():
+              if(row['NOTA_EM'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_EM'] > Upper):
+                data.drop(index, inplace=True)
 
-        for index, row in data[(data.PERFIL == "DIFICULDADE")].iterrows():
-          if(row['NOTA_GO'] < Lower):
-            data.drop(index, inplace=True)
-          if(row['NOTA_GO'] > Upper):
-            data.drop(index, inplace=True)                    
+            Q1 = data['NOTA_MF'][(data.PERFIL == "HUMANAS")].quantile(0.25)
+            Q3 = data['NOTA_MF'][(data.PERFIL == "HUMANAS")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
+
+            for index, row in data[(data.PERFIL == "HUMANAS")].iterrows():
+              if(row['NOTA_MF'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_MF'] > Upper):
+                data.drop(index, inplace=True)
+
+            Q1 = data['NOTA_GO'][(data.PERFIL == "HUMANAS")].quantile(0.25)
+            Q3 = data['NOTA_GO'][(data.PERFIL == "HUMANAS")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
+
+            for index, row in data[(data.PERFIL == "HUMANAS")].iterrows():
+              if(row['NOTA_GO'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_GO'] > Upper):
+                data.drop(index, inplace=True)
+
+            Q1 = data['NOTA_DE'][(data.PERFIL == "DIFICULDADE")].quantile(0.25)
+            Q3 = data['NOTA_DE'][(data.PERFIL == "DIFICULDADE")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
+
+            for index, row in data[(data.PERFIL == "DIFICULDADE")].iterrows():
+              if(row['NOTA_DE'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_DE'] > Upper):
+                data.drop(index, inplace=True)
+
+            Q1 = data['NOTA_EM'][(data.PERFIL == "DIFICULDADE")].quantile(0.25)
+            Q3 = data['NOTA_EM'][(data.PERFIL == "DIFICULDADE")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
+
+            for index, row in data[(data.PERFIL == "DIFICULDADE")].iterrows():
+              if(row['NOTA_EM'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_EM'] > Upper):
+                data.drop(index, inplace=True)
+
+            Q1 = data['NOTA_MF'][(data.PERFIL == "DIFICULDADE")].quantile(0.25)
+            Q3 = data['NOTA_MF'][(data.PERFIL == "DIFICULDADE")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
+
+            for index, row in data[(data.PERFIL == "DIFICULDADE")].iterrows():
+              if(row['NOTA_MF'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_MF'] > Upper):
+                data.drop(index, inplace=True)
+
+            Q1 = data['NOTA_GO'][(data.PERFIL == "DIFICULDADE")].quantile(0.25)
+            Q3 = data['NOTA_GO'][(data.PERFIL == "DIFICULDADE")].quantile(0.75)
+            IQR = Q3-Q1
+            Lower = Q1-1.5*IQR
+            Upper = Q3+1.5*IQR
+
+            for index, row in data[(data.PERFIL == "DIFICULDADE")].iterrows():
+              if(row['NOTA_GO'] < Lower):
+                data.drop(index, inplace=True)
+              if(row['NOTA_GO'] > Upper):
+                data.drop(index, inplace=True)                    
 
         # Retornamos um novo dataframe sem as colunas indesejadas
         return data
