@@ -44,7 +44,7 @@ class MediaNA(BaseEstimator, TransformerMixin):
     def transform(self, X):
         data = X.copy()
         
-        media = data['NOTA_GO'][(data.PERFIL == "EXCELENTE")].mean()
+        media = X['NOTA_GO'][(X.PERFIL == "EXCELENTE")].mean()
         for index, row in data[(data.PERFIL == "EXCELENTE")].iterrows():
           if(type(row['NOTA_GO']) == float and pd.isna(row['NOTA_GO'])):
             data.loc[data.index == index, 'NOTA_GO'] = media
