@@ -24,7 +24,7 @@ class MaiorDez(BaseEstimator, TransformerMixin):
     def transform(self, X):
         data = X.copy()
         
-        for index, row in df_data_2.iterrows():
+        for index, row in data.iterrows():
             if(row['NOTA_EM'] > 10):
                 data.loc[data.index == index, 'NOTA_EM'] = 10
             if(row['NOTA_DE'] > 10):
@@ -47,15 +47,15 @@ class MenorZero(BaseEstimator, TransformerMixin):
     def transform(self, X):
         data = X.copy()
         
-        for index, row in df_data_2.iterrows():
+        for index, row in data.iterrows():
             if(row['NOTA_EM'] < 0):
-                df_data_2.loc[df_data_2.index == index, 'NOTA_EM'] = 0
+                data.loc[data.index == index, 'NOTA_EM'] = 0
             if(row['NOTA_DE'] < 0):
-                df_data_2.loc[df_data_2.index == index, 'NOTA_DE'] = 0
+                data.loc[data.index == index, 'NOTA_DE'] = 0
             if(row['NOTA_MF'] < 0):
-                df_data_2.loc[df_data_2.index == index, 'NOTA_MF'] = 0
+                data.loc[data.index == index, 'NOTA_MF'] = 0
             if(row['NOTA_GO'] < 0):
-                df_data_2.loc[df_data_2.index == index, 'NOTA_GO'] = 0
+                data.loc[data.index == index, 'NOTA_GO'] = 0
                 
         return data
 
