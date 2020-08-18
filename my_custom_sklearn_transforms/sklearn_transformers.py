@@ -59,6 +59,24 @@ class MenorZero(BaseEstimator, TransformerMixin):
                 
         return data
 
+class MediaNan(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        return
+
+    def fit(self, X, y=None):
+        return self
+    
+    def transform(self, X):
+
+        data = X.copy()
+
+        media = data['NOTA_GO'].mean()
+        for index, row in data.iterrows():
+          if(type(row['NOTA_GO']) == float and pd.isna(row['NOTA_GO'])):
+              data.loc[data.index == index, 'NOTA_GO'] = media    
+
+        return data    
+    
 # All sklearn Transforms must have the `transform` and `fit` methods
 class DropNan(BaseEstimator, TransformerMixin):
     def __init__(self):
