@@ -405,5 +405,5 @@ class MediaZero(BaseEstimator, TransformerMixin):
               if(row['NOTA_GO'] > Upper):
                 data.drop(index, inplace=True)                    
 
-        # Retornamos um novo dataframe sem as colunas indesejadas
-        return data
+            # Retornamos um novo dataframe sem as colunas indesejadas
+            return data
