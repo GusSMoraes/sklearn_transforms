@@ -79,21 +79,18 @@ class ImplementaSmote(BaseEstimator, TransformerMixin):
         self.features = features
         self.target = target
 
-    def fit(self, A, B, y=None):
+    def fit(self, X, y=None):
         return self
 
-    def transform(self, A, B, X):
+    def transform(self, X):
         from imblearn.over_sampling import SMOTE
         data = X.copy()
 
         self.features = ["NOTA_DE", "NOTA_EM", "NOTA_MF", "NOTA_GO"]
-        features = self.features
 
         X = data[self.features]
         y = data[self.target]
         
-        X_resampled, y_resampled = SMOTE().fit_resample(X, y.values.ravel())
-        X = X_resampled
-        y = y_resampled 
+        X, y = SMOTE().fit_resample(X, y.values.ravel())
 
         return X, y
