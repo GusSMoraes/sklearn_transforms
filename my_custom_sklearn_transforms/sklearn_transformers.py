@@ -35,7 +35,8 @@ class TiraNota(BaseEstimator, TransformerMixin):
         return data
     
 class MediaNA(BaseEstimator, TransformerMixin):
-    def __init__(self):
+    def __init__(self, df_data_1):
+		self.df_data_1 = df_data_1
         return
 
     def fit(self, X, y=None):
@@ -44,32 +45,33 @@ class MediaNA(BaseEstimator, TransformerMixin):
     def transform(self, X):
         data = X.copy()
         
-        for index, row in data[(data.PERFIL == "EXCELENTE")].iterrows():
+        media = df_data_1['NOTA_GO'][(df_data_1.PERFIL == "EXCELENTE")].mean()
+        for index, row in df_data_1[(df_data_1.PERFIL == "EXCELENTE")].iterrows():
           if(type(row['NOTA_GO']) == float and pd.isna(row['NOTA_GO'])):
-            data.loc[data.index == index, 'NOTA_GO'] = media
+            df_data_1.loc[df_data_1.index == index, 'NOTA_GO'] = media
 
-        media = data['NOTA_GO'][(data.PERFIL == "MUITO_BOM")].mean()
-        for index, row in data[(data.PERFIL == "MUITO_BOM")].iterrows():
+        media = df_data_1['NOTA_GO'][(df_data_1.PERFIL == "MUITO_BOM")].mean()
+        for index, row in df_data_1[(df_data_1.PERFIL == "MUITO_BOM")].iterrows():
           if(type(row['NOTA_GO']) == float and pd.isna(row['NOTA_GO'])):
-            data.loc[data.index == index, 'NOTA_GO'] = media
+            df_data_1.loc[df_data_1.index == index, 'NOTA_GO'] = media
         
-        media = data['NOTA_GO'][(data.PERFIL == "EXATAS")].mean()
-        for index, row in data[(data.PERFIL == "EXATAS")].iterrows():
+        media = df_data_1['NOTA_GO'][(df_data_1.PERFIL == "EXATAS")].mean()
+        for index, row in df_data_1[(df_data_1.PERFIL == "EXATAS")].iterrows():
           if(type(row['NOTA_GO']) == float and pd.isna(row['NOTA_GO'])):
-            data.loc[data.index == index, 'NOTA_GO'] = media  
+            df_data_1.loc[df_data_1.index == index, 'NOTA_GO'] = media  
 
-        media = data['NOTA_GO'][(data.PERFIL == "HUMANAS")].mean()
-        for index, row in data[(data.PERFIL == "HUMANAS")].iterrows():
+        media = df_data_1['NOTA_GO'][(df_data_1.PERFIL == "HUMANAS")].mean()
+        for index, row in df_data_1[(df_data_1.PERFIL == "HUMANAS")].iterrows():
           if(type(row['NOTA_GO']) == float and pd.isna(row['NOTA_GO'])):
-            data.loc[data.index == index, 'NOTA_GO'] = media
+            df_data_1.loc[df_data_1.index == index, 'NOTA_GO'] = media
 
-        media = data['NOTA_GO'][(data.PERFIL == "DIFICULDADE")].mean()
-        for index, row in data[(data.PERFIL == "DIFICULDADE")].iterrows():
+        media = df_data_1['NOTA_GO'][(df_data_1.PERFIL == "DIFICULDADE")].mean()
+        for index, row in df_data_1[(df_data_1.PERFIL == "DIFICULDADE")].iterrows():
           if(type(row['NOTA_GO']) == float and pd.isna(row['NOTA_GO'])):
-            data.loc[data.index == index, 'NOTA_GO'] = media
+            df_data_1.loc[df_data_1.index == index, 'NOTA_GO'] = media
 
-        # Retornamos um novo dataframe sem as colunas indesejadas
-        return data    
+        # Retornamos um novo df_dataframe sem as colunas indesejadas
+        return df_data_1    
     
 class MediaZero(BaseEstimator, TransformerMixin):
     def __init__(self):
