@@ -69,12 +69,12 @@ class MediaNan(BaseEstimator, TransformerMixin):
 
         data = X.copy()
 
-        media = data['NOTA_GO'].mean()
+        media = data.loc[data['NOTA_GO'] > 0, 'NOTA_GO'].mean()
         for index, row in data.iterrows():
-          if(type(row['NOTA_GO']) == float and pd.isna(row['NOTA_GO'])):
-              data.loc[data.index == index, 'NOTA_GO'] = media    
+            if(type(row['NOTA_GO']) == float and pd.isna(row['NOTA_GO'])):
+                data.loc[data.index == index, 'NOTA_GO'] = media    
 
-        return data       
+        return data     
 
 class ImplementaSmote(BaseEstimator, TransformerMixin):
     def __init__(self, features, target):
