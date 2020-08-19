@@ -84,7 +84,7 @@ class ImplementaSmote(BaseEstimator, TransformerMixin):
     def fit(self, X, y=None):
         return self
 
-    def transform(self, A, B, X):
+    def transform(self, X):
         from imblearn.over_sampling import SMOTE
         data = X.copy()
 
