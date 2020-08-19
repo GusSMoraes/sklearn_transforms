@@ -84,7 +84,7 @@ class ImplementaSmote(BaseEstimator, TransformerMixin):
     def fit(self, X, y=None):
         return self
 
-    def transform(self, X):
+    def transform(self, A, B, X):
         from imblearn.over_sampling import SMOTE
         data = X.copy()
 
@@ -94,5 +94,8 @@ class ImplementaSmote(BaseEstimator, TransformerMixin):
         y = data[self.target]
         
         X, y = SMOTE().fit_resample(X, y.values.ravel())
+        
+        X = pd.DataFrame(data=X, index=None, columns=self.features)
+        y = pd.DataFrame(data=y, index=None, columns=self.target)
 
         return X, y
