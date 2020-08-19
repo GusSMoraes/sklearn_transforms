@@ -81,10 +81,10 @@ class AtualizaFeature(BaseEstimator, TransformerMixin):
         self.features = features
         return
 
-    def fit(self, y=None):
+    def fit(self, X, y=None):
         return self
 
-    def transform(self):
+    def transform(self, X):
 
         features = ["NOTA_DE", "NOTA_EM", "NOTA_MF", "NOTA_GO"]
 
