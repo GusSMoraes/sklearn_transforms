@@ -35,8 +35,7 @@ class MaiorDez(BaseEstimator, TransformerMixin):
                 data.loc[data.index == index, 'NOTA_GO'] = 10
                 
         return data
-
-# All sklearn Transforms must have the `transform` and `fit` methods
+    
 class MenorZero(BaseEstimator, TransformerMixin):
     def __init__(self):
         return
@@ -75,22 +74,7 @@ class MediaNan(BaseEstimator, TransformerMixin):
           if(type(row['NOTA_GO']) == float and pd.isna(row['NOTA_GO'])):
               data.loc[data.index == index, 'NOTA_GO'] = media    
 
-        return data    
-    
-# All sklearn Transforms must have the `transform` and `fit` methods
-class DropNan(BaseEstimator, TransformerMixin):
-    def __init__(self):
-        return
-
-    def fit(self, X, y=None):
-        return self
-    
-    def transform(self, X):
-        data = X.copy()
-        
-        data = data.dropna(axis=0, how='any', thresh=None, subset=None, inplace=False)
-                
-        return data
+        return data       
 
 class ImplementaSmote(BaseEstimator, TransformerMixin):
     def __init__(self, features, target):
