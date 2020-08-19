@@ -74,12 +74,27 @@ class MediaNan(BaseEstimator, TransformerMixin):
             if(type(row['NOTA_GO']) == float and pd.isna(row['NOTA_GO'])):
                 data.loc[data.index == index, 'NOTA_GO'] = media    
 
-        return data     
+        return data
+    
+class AtualizaFeature(BaseEstimator, TransformerMixin):
+    def __init__(self,features):
+        self.features = features
+        return
+
+    def fit(self, y=None):
+        return self
+
+    def transform(self):
+
+        features = ["NOTA_DE", "NOTA_EM", "NOTA_MF", "NOTA_GO"]
+
+        return features
 
 class ImplementaSmote(BaseEstimator, TransformerMixin):
     def __init__(self, features, target):
         self.features = features
         self.target = target
+        return
 
     def fit(self, X, y=None):
         return self
@@ -88,15 +103,12 @@ class ImplementaSmote(BaseEstimator, TransformerMixin):
         from imblearn.over_sampling import SMOTE
         data = X.copy()
 
-        self.features = ["NOTA_DE", "NOTA_EM", "NOTA_MF", "NOTA_GO"]
-        features = self.features
-
-        ftr = data[features]
-        tgt = data[target]
+        X = data[features]
+        y = data[target]
         
-        ftr_resample, tgt_resample = SMOTE().fit_resample(ftr, tgt.values.ravel())
+        X, y = SMOTE().fit_resample(X, y.values.ravel())
         
-        X = pd.DataFrame(data=ftr_resample, index=None, columns=self.features)
-        y = pd.DataFrame(data=tgt_resample, index=None, columns=self.target)
+        X = pd.DataFrame(data=X, index=None, columns=self.features)
+        y = pd.DataFrame(data=y, index=None, columns=self.target)
 
         return X, y
