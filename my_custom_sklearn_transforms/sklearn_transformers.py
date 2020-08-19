@@ -89,13 +89,14 @@ class ImplementaSmote(BaseEstimator, TransformerMixin):
         data = X.copy()
 
         self.features = ["NOTA_DE", "NOTA_EM", "NOTA_MF", "NOTA_GO"]
+        features = self.features
 
-        X = data[self.features]
-        y = data[self.target]
+        ftr = data[features]
+        tgt = data[target]
         
-        X, y = SMOTE().fit_resample(X, y.values.ravel())
+        ftr_resample, tgt_resample = SMOTE().fit_resample(ftr, tgt.values.ravel())
         
-        X = pd.DataFrame(data=X, index=None, columns=self.features)
-        y = pd.DataFrame(data=y, index=None, columns=self.target)
+        X = pd.DataFrame(data=ftr_resample, index=None, columns=self.features)
+        y = pd.DataFrame(data=tgt_resample, index=None, columns=self.target)
 
         return X, y
