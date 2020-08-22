@@ -55,6 +55,7 @@ class NotaNan(BaseEstimator, TransformerMixin):
     
     def transform(self, X):
         data = X.copy()
+        import pandas as pd
         
         for index, row in data.iterrows():
             if(pd.isna(row['NOTA_DE']) & (row['REPROVACOES_DE'] > 0)):
