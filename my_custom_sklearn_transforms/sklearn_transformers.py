@@ -14,7 +14,7 @@ class DropColumns(BaseEstimator, TransformerMixin):
         # Retornamos um novo dataframe sem as colunas indesejadas
         return data.drop(labels=self.columns, axis='columns')
     
-class MaiorDez(BaseEstimator, TransformerMixin):
+class Limite(BaseEstimator, TransformerMixin):
     def __init__(self):
         return
 
@@ -34,18 +34,6 @@ class MaiorDez(BaseEstimator, TransformerMixin):
             if(row['NOTA_GO'] > 10):
                 data.loc[data.index == index, 'NOTA_GO'] = 10
                 
-        return data
-    
-class MenorZero(BaseEstimator, TransformerMixin):
-    def __init__(self):
-        return
-
-    def fit(self, X, y=None):
-        return self
-    
-    def transform(self, X):
-        data = X.copy()
-        
         for index, row in data.iterrows():
             if(row['NOTA_EM'] < 0):
                 data.loc[data.index == index, 'NOTA_EM'] = 0
@@ -57,8 +45,8 @@ class MenorZero(BaseEstimator, TransformerMixin):
                 data.loc[data.index == index, 'NOTA_GO'] = 0
                 
         return data
-
-class MediaNan(BaseEstimator, TransformerMixin):
+    
+class NotaNan(BaseEstimator, TransformerMixin):
     def __init__(self):
         return
 
@@ -66,49 +54,26 @@ class MediaNan(BaseEstimator, TransformerMixin):
         return self
     
     def transform(self, X):
-
         data = X.copy()
-
-        media = data.loc[data['NOTA_GO'] > 0, 'NOTA_GO'].mean()
+        
         for index, row in data.iterrows():
-            if(type(row['NOTA_GO']) == float and pd.isna(row['NOTA_GO'])):
-                data.loc[data.index == index, 'NOTA_GO'] = media    
-
+            if(pd.isna(row['NOTA_DE']) & (row['REPROVACOES_DE'] > 0)):
+                data.loc[data.index == index, 'NOTA_DE'] = 0
+            if(pd.isna(row['NOTA_EM']) & (row['REPROVACOES_EM'] > 0)):
+                data.loc[data.index == index, 'NOTA_EM'] = 0
+            if(pd.isna(row['NOTA_MF']) & (row['REPROVACOES_MF'] > 0)):
+                data.loc[data.index == index, 'NOTA_MF'] = 0
+            if(pd.isna(row['NOTA_GO']) & (row['REPROVACOES_GO'] > 0)):
+                data.loc[data.index == index, 'NOTA_GO'] = 0
+                
+        for index, row in data.iterrows():
+            if(pd.isna(row['NOTA_DE']) & (row['REPROVACOES_DE'] == 0)):
+                data.loc[data.index == index, 'NOTA_DE'] = data.loc[data.index == index , ["NOTA_GO","NOTA_EM","NOTA_MF"]].mean(axis=1)
+            if(pd.isna(row['NOTA_EM']) & (row['REPROVACOES_EM'] == 0)):
+                data.loc[data.index == index, 'NOTA_EM'] = data.loc[data.index == index , ["NOTA_GO","NOTA_DE","NOTA_MF"]].mean(axis=1)
+            if(pd.isna(row['NOTA_MF']) & (row['REPROVACOES_MF'] == 0)):
+                data.loc[data.index == index, 'NOTA_MF'] = data.loc[data.index == index , ["NOTA_GO","NOTA_EM","NOTA_DE"]].mean(axis=1)
+            if(pd.isna(row['NOTA_GO']) & (row['REPROVACOES_GO'] == 0)):
+                data.loc[data.index == index, 'NOTA_GO'] = data.loc[data.index == index , ["NOTA_DE","NOTA_EM","NOTA_MF"]].mean(axis=1)
+                
         return data
-    
-class AtualizaFeature(BaseEstimator, TransformerMixin):
-    def __init__(self,features):
-        self.features = features
-        return
-
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X):
-
-        features = ["NOTA_DE", "NOTA_EM", "NOTA_MF", "NOTA_GO"]
-
-        return features
-
-class ImplementaSmote(BaseEstimator, TransformerMixin):
-    def __init__(self, features, target):
-        self.features = features
-        self.target = target
-        return
-
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X):
-        from imblearn.over_sampling import SMOTE
-        data = X.copy()
-
-        X = data[features]
-        y = data[target]
-        
-        X, y = SMOTE().fit_resample(X, y.values.ravel())
-        
-        X = pd.DataFrame(data=X, index=None, columns=self.features)
-        y = pd.DataFrame(data=y, index=None, columns=self.target)
-
-        return X, y
